@@ -158,3 +158,37 @@ span{
   align-items: center;
   flex-direction: column;
 }
+.home-page-main-div{
+  display:flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column
+}
+.main-image-larger{
+  height: 600px;
+  width: 750px;
+  justify-content: center;
+}
+.middle-small-image{
+  height:230px;
+  width: 300px;
+  background-color: mediumpurple;
+}
+.small-cover-images{
+        padding:20px;
+        display:flex;
+}
+.main-checkout-div{
+  display: flex;
+  background-color: lightslategrey;
+}
+.address-input-field{
+  height:600px;
+  width:600px;
+  background-color: lightcoral
+}
+.cart-checkout-div{
+  height:600px;
+  width:600px;
+  background-color: indianred;
+}

@@ -6,13 +6,16 @@ class Cart extends Component{
     constructor(){
         super();
         this.state = {
-            cart:[]
+            cart:[],
+            total:0
         }
     }
     componentDidMount(){
         axios
         .get('/api/cart')
-        .then(response => this.setState({cart:response.data.cart}))
+        .then(response => this.setState({
+            cart:response.data.cart,
+        }))
         .catch(console.log())
     }
     deleteItem(id){
@@ -23,6 +26,8 @@ class Cart extends Component{
           })
     }
     render(){
+        let total = this.state.total;
+        let totalOfItems =  this.state.cart.reduce( (total, currentValue) => total + Number(currentValue.product_price) , 0 );
         let cartList = [];
         const cartItems = this.state.cart;
         console.log(this.state.cart);
@@ -47,7 +52,14 @@ class Cart extends Component{
         }
 
         return(
-            <div className="shopping-cart-div-main">{cartList}</div>
+            <div className="shopping-cart-div-main">
+            {cartList}
+            <div className="total-checkout-div">
+            <h2>Total:${totalOfItems}</h2>
+            <button>CheckOut</button>
+            </div>
+            </div>
+            
 
         )
     }

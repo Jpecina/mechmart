@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-class Dropdown extends React.Component {
+class CategorySelector extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,15 +18,22 @@ class Dropdown extends React.Component {
   }
 
   render() {
+      const dropdownStyle={
+          backgroundColor:"#D1D0CC",
+          border:'none',
+          margin:'10px',
+          borderRadius:'10px'
+      }
     return (
-      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle caret>
-          Dropdown
+      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} >
+        <DropdownToggle caret style={dropdownStyle}>
+          {this.props.toggleName}
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem disabled>Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
+          <DropdownItem header>Brand</DropdownItem>
+          <DropdownItem>{this.props.item1}</DropdownItem>
+          <DropdownItem>{this.props.item2}</DropdownItem>
+          <DropdownItem>{this.props.item3}</DropdownItem>
           <DropdownItem divider />
           <DropdownItem>Another Action</DropdownItem>
         </DropdownMenu>
@@ -35,4 +42,4 @@ class Dropdown extends React.Component {
   }
 }
 
-export default Dropdown;
+export default CategorySelector;
