@@ -8,12 +8,6 @@ import Header from '../Header';
 import {Link} from 'react-router-dom';
 
 class Shop extends Component{
-    constructor(){
-        super();
-        this.state = {
-            cart:[]
-        }
-    }
     componentDidMount(){
         this.props.getProducts();
     }

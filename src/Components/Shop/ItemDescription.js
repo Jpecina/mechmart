@@ -1,17 +1,21 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import Header from '../Header';
+import {Button} from 'reactstrap';
+
 
 class ItemInfo extends Component{
     constructor(){
         super();
         this.state = {
             item:[],
-            currentImage:''
+            currentImage:'',
+            cart:[]
         }
-    this.imageSelectOne = this.imageSelectOne.bind(this)
-    this.imageSelectTwo = this.imageSelectTwo.bind(this)
-    this.imageSelectThree = this.imageSelectThree.bind(this)
+    this.addToCart = this.addToCart.bind(this);    
+    this.imageSelectOne = this.imageSelectOne.bind(this);
+    this.imageSelectTwo = this.imageSelectTwo.bind(this);
+    this.imageSelectThree = this.imageSelectThree.bind(this);
     
     }
     componentDidMount(){
@@ -20,6 +24,9 @@ class ItemInfo extends Component{
             this.setState({
                 item:response.data[0],currentImage:response.data[0].imageone})
         })
+    }
+    addToCart(item){
+        axios.post('/api/cart',item).then(response => console.log(response.data.cart)).catch(err=>console.log(err))
     }
     imageSelectOne(){
         this.setState({currentImage: this.state.item.imageone})
@@ -31,6 +38,10 @@ class ItemInfo extends Component{
         this.setState({currentImage:this.state.item.imagethree})
     }
     render(){
+       const buttonStyle={
+            height:'40px',
+            justifyContent: 'flexEnd'
+        }
         console.log(this.props)
         const itemInfo = this.state.item
         return(
@@ -41,11 +52,13 @@ class ItemInfo extends Component{
                     <div className="image-box">
                         <img src={this.state.currentImage} className="image-info"/>
                     <div className="image-nav">
-                        <img src = {itemInfo.imageone} onClick={() => this.imageSelectOne()} className="small-image"/>
-                        <img src = {itemInfo.imagetwo} onClick={() => this.imageSelectTwo()} className="small-image"/>
-                        <img src = {itemInfo.imagethree} onClick={() => this.imageSelectThree()} className="small-image"/>
-                        <span className="add-to-cart">Add To Cart</span>
-                    </div>
+                        <div>
+                            <img src = {itemInfo.imageone} onClick={() => this.imageSelectOne()} className="small-image"/>
+                            <img src = {itemInfo.imagetwo} onClick={() => this.imageSelectTwo()} className="small-image"/>
+                            <img src = {itemInfo.imagethree} onClick={() => this.imageSelectThree()} className="small-image"/>
+                            </div>
+                            <span className="add-to-cart-button" onClick={(e) => this.addToCart(itemInfo)}>Add To Cart</span>
+                        </div>
                         </div>
                     <p>{itemInfo.description}</p>
                 </div>
