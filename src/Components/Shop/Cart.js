@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
+import {Button} from 'reactstrap'
 
 
 class Cart extends Component{
@@ -43,8 +44,8 @@ class Cart extends Component{
                     <div className="cart-item-info">
                         <h4>{item.product_name}</h4>
                         <h1>{item.product_price}</h1>   
-                    <button onClick = {() => {
-                    this.deleteItem(item.id)}}>Delete</button> 
+                    <Button onClick = {() => {
+                    this.deleteItem(item.id)}}>Delete</Button> 
                     </div>        
                 </div> 
                 )
@@ -56,7 +57,7 @@ class Cart extends Component{
             {cartList}
             <div className="total-checkout-div">
             <h2>Total:${totalOfItems}</h2>
-            <button>CheckOut</button>
+            <Button>CheckOut</Button>
             </div>
             </div>
             

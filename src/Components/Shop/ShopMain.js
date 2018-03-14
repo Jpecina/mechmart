@@ -10,9 +10,9 @@ function MainShopFront(){
     return(
         <div className="shop">
         <div className="category-nav">
-        <CategorySelector toggleName="Mechanical KeyBoards" item1="Realforce" item2="Leopold" item3="HHKB"/>
-        <CategorySelector toggleName="Cases/Accessories"/>
-        <CategorySelector toggleName="Artisans"/>
+        <CategorySelector toggleName="Mechanical KeyBoards" item1="Realforce" item2="Leopold" item3="Filco"/>
+        <CategorySelector toggleName="Cases/Accessories" item1="Pexon" />
+        <CategorySelector toggleName="Artisans" />
         </div>
         <div className = "main-shop-container">
 

@@ -26,7 +26,6 @@ class Shop extends Component{
             );
         }
         console.log(productData)
-        
         const productList = productData.map((product,i)=>{
             return(
                 <div key={i}>

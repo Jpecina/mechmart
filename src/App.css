@@ -192,3 +192,9 @@ span{
   width:600px;
   background-color: indianred;
 }
+.form-div{
+  height:70%;
+  width: 50%;
+  display:flex;
+  
+}

@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import Header from '../Header';
 import {Button} from 'reactstrap';
+import Review from '../Form';
 
 
 class ItemInfo extends Component{
@@ -38,10 +39,16 @@ class ItemInfo extends Component{
         this.setState({currentImage:this.state.item.imagethree})
     }
     render(){
-       const buttonStyle={
+        const reviewResultsContainerStyle = {
+            height:"500px",
+            width: "800px",
+            border:"solid",
+            paddingTop:"300px"
+        };
+        const buttonStyle={
             height:'40px',
             justifyContent: 'flexEnd'
-        }
+        };
         console.log(this.props)
         const itemInfo = this.state.item
         return(
@@ -57,10 +64,18 @@ class ItemInfo extends Component{
                             <img src = {itemInfo.imagetwo} onClick={() => this.imageSelectTwo()} className="small-image"/>
                             <img src = {itemInfo.imagethree} onClick={() => this.imageSelectThree()} className="small-image"/>
                             </div>
-                            <span className="add-to-cart-button" onClick={(e) => this.addToCart(itemInfo)}>Add To Cart</span>
+                            <Button className="add-to-cart-button" onClick={(e) => this.addToCart(itemInfo)}>Add To Cart</Button>
                         </div>
                         </div>
                     <p>{itemInfo.description}</p>
+                    <br/>
+                    <div style={reviewResultsContainerStyle}>
+                        <div>
+                            <h5></h5>
+                            <h6></h6>
+                        </div>
+                    </div>
+                    <Review />
                 </div>
             </div>
         )

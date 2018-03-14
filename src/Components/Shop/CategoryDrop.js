@@ -27,18 +27,22 @@ class CategorySelector extends React.Component {
           margin:'10px',
           borderRadius:'10px'
       }
+      const toggleName = this.props.toggleName;
+      const item1 = this.props.item1;
+      const item2 = this.props.item2;
+      const item3 = this.props.item3;
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} >
         <DropdownToggle caret style={dropdownStyle}>
-          {this.props.toggleName}
+          {toggleName}
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>Brand</DropdownItem>
-          <DropdownItem >{this.props.item1}</DropdownItem>
-          <DropdownItem onClick = {console.log(this.props.item2)}>{this.props.item2}</DropdownItem>
-          <DropdownItem>{this.props.item3}</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Another Action</DropdownItem>
+          <DropdownItem onClick = { () => this.props.getProductsByBrand(item1)}>{item1}</DropdownItem>
+          <DropdownItem onClick = { () => {
+            console.log("Click succeed:",item2)
+            this.props.getProductsByBrand(item2).then(response => this.props.products)}} >{item2}</DropdownItem>
+          <DropdownItem onClick = {() => this.props.getProductsByBrand(item3)}>{item3}</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     );

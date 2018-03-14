@@ -84,6 +84,20 @@ app.get('/api/logout', (req,res) => {
   })
 })
 
+// get all users
+app.get('/api/getusers',(req,res) => {
+  app
+  .get('db')
+  .getUsers()
+  .then(response => {
+    res.status(200).json(response)
+  })
+  .catch(err => {
+    res.status(500).json(response)
+  })
+
+})
+
 app.get('/api/products',(req,res)=>{
   req.app
      .get('db')

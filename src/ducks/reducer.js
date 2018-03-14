@@ -11,7 +11,7 @@ export function getUsers(){
     return {
         type: GET_USERS,
         payload: axios
-        .get("/api/test")
+        .get('/api/getusers')
         .then(response => {
           return response.data;
         })
@@ -91,7 +91,7 @@ export default function reducer( state = initialState ,action ){
         case `${GET_PRODUCTS_BY_BRAND}_FULFILLED`:
             return Object.assign({},state,{
                 isLoading:false,
-                brands:action.payload
+                products:action.payload
             })
         case `${GET_PRODUCTS_BY_BRAND}_REJECTED`:
             return Object.assign({},state,{

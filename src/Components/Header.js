@@ -13,6 +13,8 @@ import {
     Button
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getUsers} from '../ducks/reducer';
 
 class Header extends Component {
     constructor(props) {
@@ -23,12 +25,17 @@ class Header extends Component {
             isOpen: false
         };
     }
+    componentDidMount(){
+        this.props.getUsers();
+    }
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
     render() {
+        console.log("this is props:",this.props.users)
+
         return (
             <div>
                 <Navbar color="inverse" light expand="md">
@@ -49,7 +56,7 @@ class Header extends Component {
                                 <NavLink href="/#/cart">Cart</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href={process.env.REACT_APP_LOGIN}>Login</NavLink>
+                                <NavLink href={process.env.REACT_APP_LOGIN}></NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
@@ -59,4 +66,6 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps,{getUsers})(Header);

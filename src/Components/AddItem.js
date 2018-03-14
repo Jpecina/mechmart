@@ -4,10 +4,11 @@ import FormSheet from './Form';
 function AddItem(){
     const style = {
         height:'70%',
-        width: '50%'
+        width: '50%',
+        display:'flex',
     }
     return(
-        <div style = {style}>
+        <div className = "form-div" style = {style}>
         <FormSheet/>
         </div>
     )
