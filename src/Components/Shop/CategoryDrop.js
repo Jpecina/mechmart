@@ -1,5 +1,7 @@
 import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {connect} from 'react-redux';
+import {getProductsByBrand} from '../../ducks/reducer';
 
 class CategorySelector extends React.Component {
   constructor(props) {
@@ -8,6 +10,7 @@ class CategorySelector extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false
+
     };
   }
 
@@ -31,8 +34,8 @@ class CategorySelector extends React.Component {
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>Brand</DropdownItem>
-          <DropdownItem>{this.props.item1}</DropdownItem>
-          <DropdownItem>{this.props.item2}</DropdownItem>
+          <DropdownItem >{this.props.item1}</DropdownItem>
+          <DropdownItem onClick = {console.log(this.props.item2)}>{this.props.item2}</DropdownItem>
           <DropdownItem>{this.props.item3}</DropdownItem>
           <DropdownItem divider />
           <DropdownItem>Another Action</DropdownItem>
@@ -42,4 +45,6 @@ class CategorySelector extends React.Component {
   }
 }
 
-export default CategorySelector;
+
+const mapStateToProps = state => state;
+export default connect( mapStateToProps , {getProductsByBrand} ) (CategorySelector);

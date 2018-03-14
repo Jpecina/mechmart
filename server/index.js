@@ -95,6 +95,9 @@ app.get('/api/products',(req,res)=>{
        res.status(500).json(err)
      })
 });
+
+// fetches product by id 
+
 app.get('/api/product/:id',(req,res,next) => {
   app.get('db')
   .getProductById(req.params.id)
@@ -105,6 +108,21 @@ app.get('/api/product/:id',(req,res,next) => {
     res.status(500).json(console.log(err))
   })
 });
+
+// get product by Brand
+
+app.get('/api/products/:id',(req,res,next) => {
+    app.get('db')
+    .getProductsByBrand([req.params.id])
+    .then(response => {
+      console.log("products by brand success:", response)
+      res.status(200).json(response)
+    }).catch(err => {
+      res.status(500).json(console.log(err))
+    })
+} )
+
+// add Product to database
 
 app.post('/api/products/add',(req,res)=>{
   req.app
@@ -119,14 +137,22 @@ app.post('/api/products/add',(req,res)=>{
 
 });
 
+// fetch cart in session
+
 app.get("/api/cart", (req, res, next) => res.status(200).json(req.session.user))
+
+//add item to cart
 
 app.post('/api/cart',(req,res,next) => {
   req.session.user.cart.push(req.body)
   res.status(200).json(req.session.user)
 } )
 
+// deletes item from cart
+
 app.delete('/api/cart/:id',cart_controllers.destroy)
+
+
 
 app.listen(port, () => {
   console.log(`Listening on Port: ${port}`);

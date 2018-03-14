@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getProducts} from '../../ducks/reducer';
+import {getProductsByBrand} from '../../ducks/reducer';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 import SideBar from './Sidebar';
@@ -10,6 +11,7 @@ import {Link} from 'react-router-dom';
 class Shop extends Component{
     componentDidMount(){
         this.props.getProducts();
+        this.props.getProductsByBrand();
     }
     render(){
         const cardStyle = {
@@ -24,6 +26,7 @@ class Shop extends Component{
             );
         }
         console.log(productData)
+        
         const productList = productData.map((product,i)=>{
             return(
                 <div key={i}>
@@ -51,4 +54,4 @@ class Shop extends Component{
 }
 
 const mapStateToProps = state => state;
-export default connect(mapStateToProps,{getProducts})(Shop);
+export default connect(mapStateToProps,{getProducts,getProductsByBrand})(Shop);

@@ -7,6 +7,7 @@ import About from './Components/About/About';
 import MainShopFront from './Components/Shop/ShopMain';
 import ItemInfo from './Components/Shop/ItemDescription';
 import CheckOut from "./Components/Shop/CheckOut";
+import AddItem from './Components/AddItem';
 
 
 
@@ -19,6 +20,7 @@ export default (
         <Route path = "/shop/item/:id" component={ItemInfo}/>
         <Route path = "/shop" component={MainShopFront}/>
         <Route path = "/cart/checkout" component={CheckOut}/>
+        <Route path = "/additem" component={AddItem}/>
         
         <Route path = '*' render = { () => {
             <div>

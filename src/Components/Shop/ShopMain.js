@@ -5,6 +5,7 @@ import Shop from './Shop';
 import Dropdown from './CategoryDrop';
 import CategorySelector from './CategoryDrop';
 
+
 function MainShopFront(){
     return(
         <div className="shop">

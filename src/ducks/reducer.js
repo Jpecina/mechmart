@@ -3,6 +3,7 @@ import axios from 'axios';
 //constants
 const GET_USERS = "GET_USERS"
 const GET_PRODUCTS = "GET_PRODUCTS"
+const GET_PRODUCTS_BY_BRAND = "GET_PRODUCTS_BY_BRAND"
 
 //Action creators
 
@@ -19,11 +20,24 @@ export function getUsers(){
 
 }
 
+
 export function getProducts(){
     return {
         type:GET_PRODUCTS,
         payload: axios
         .get('/api/products')
+        .then(response => {
+            return response.data;
+        })
+        .catch(console.log)
+    }
+}
+
+export function getProductsByBrand(brand){
+    return {
+        type:GET_PRODUCTS_BY_BRAND,
+        payload: axios
+        .get(`/api/products/${brand}`)
         .then(response => {
             return response.data;
         })
@@ -37,7 +51,8 @@ const initialState = {
     users: [],
     isLoading: false,
     didError: false,
-    products:[]
+    products:[],
+    brands:[]
 
 };
 
@@ -68,7 +83,21 @@ export default function reducer( state = initialState ,action ){
             return Object.assign({},state,{
                 isLoading:false,
                 didError: true
-            }); 
+            });
+        case `${GET_PRODUCTS_BY_BRAND}_PENDING`:
+            return Object.assign({},state,{
+                isLoading:true
+            })
+        case `${GET_PRODUCTS_BY_BRAND}_FULFILLED`:
+            return Object.assign({},state,{
+                isLoading:false,
+                brands:action.payload
+            })
+        case `${GET_PRODUCTS_BY_BRAND}_REJECTED`:
+            return Object.assign({},state,{
+                isLoading:false,
+                didError:true
+            })
             
         default: 
             return state;
