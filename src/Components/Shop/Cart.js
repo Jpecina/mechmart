@@ -26,6 +26,9 @@ class Cart extends Component{
             })
           })
     }
+    checkOut(){
+        axios.post('/api/orderplaced').then(response => console.log(response))
+    }
     render(){
         let total = this.state.total;
         let totalOfItems =  this.state.cart.reduce( (total, currentValue) => total + Number(currentValue.product_price) , 0 );
@@ -57,7 +60,7 @@ class Cart extends Component{
             {cartList}
             <div className="total-checkout-div">
             <h2>Total:${totalOfItems}</h2>
-            <Button>CheckOut</Button>
+            <Button onClick = {this.checkOut()}>CheckOut</Button>
             </div>
             </div>
             

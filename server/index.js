@@ -10,10 +10,11 @@ const CreateInitialSession = require('./middleware/session')
 const cart_controllers = require('./controllers/cart_controllers');
 
 
+
 const port = 3001;
 
 const app = express();
-
+app.use(express.static(`${__dirname}/../build`));
 const { 
   CONNECTION_STRING,
   DOMAIN,
@@ -70,19 +71,19 @@ passport.serializeUser((user, done) => done(null,user) );
 passport.deserializeUser((user, done) => done(null,user) );
 
 app.get('/auth',passport.authenticate("auth0",{
-  successRedirect: 'http://localhost:3000/#/',
-  failureRedirect: 'http://localhost:300/#/login'
+  successRedirect: 'http://localhost:3001/#/',
+  failureRedirect: 'http://localhost:3001/#/login'
 }
 ))
 
 app.get('/api/me', (req,res)=>{
   if(req.user) res.status(200).json(req.user);
-  else res.redirect('http://localhost:3000/#/login')
+  else res.redirect('http://localhost:3001/#/login')
 })
 
 app.get('/api/logout', (req,res) => {
   req.session.destroy(()=>{
-    res.redirect('http://localhost:3000/#/login')
+    res.redirect('http://localhost:3001/#/login')
   })
 })
 
@@ -153,6 +154,23 @@ app.post('/api/products/add',(req,res)=>{
      })
 
 });
+// add order to database
+      
+
+
+
+
+  app.post('/api/orderplaced',(req, res)=> {
+      console.log("this is the user in session:",req.session)
+      let cartPush = req.session.user.cart.forEach((cartItem, i)=>{
+      let value = parseFloat(req.session.user.cart[i].product_price)
+      // console.log("this is the user in session:",req.session)
+      req.app
+      .get('db')
+      .addOrder([req.session.user.cart[i].product_name,value, req.session.passport.user.authid])
+      })
+  })
+      
 
 // fetch cart in session
 
@@ -170,6 +188,12 @@ app.post('/api/cart',(req,res,next) => {
 app.delete('/api/cart/:id',cart_controllers.destroy)
 
 
+
+
+const path = require('path')
+app.get('*', (req,res) => {
+  res.sendFile(path.join(__dirname,'../build/index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Listening on Port: ${port}`);
