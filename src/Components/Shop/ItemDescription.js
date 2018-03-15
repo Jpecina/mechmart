@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from '../Header';
 import {Button} from 'reactstrap';
 import Review from '../Form';
+import ReviewSection from './ReviewSection/ReviewSection';
 
 
 class ItemInfo extends Component{
@@ -39,12 +40,7 @@ class ItemInfo extends Component{
         this.setState({currentImage:this.state.item.imagethree})
     }
     render(){
-        const reviewResultsContainerStyle = {
-            height:"500px",
-            width: "800px",
-            border:"solid",
-            paddingTop:"300px"
-        };
+        
         const buttonStyle={
             height:'40px',
             justifyContent: 'flexEnd'
@@ -68,14 +64,7 @@ class ItemInfo extends Component{
                         </div>
                         </div>
                     <p>{itemInfo.description}</p>
-                    <br/>
-                    <div style={reviewResultsContainerStyle}>
-                        <div>
-                            <h5></h5>
-                            <h6></h6>
-                        </div>
-                    </div>
-                    <Review />
+                    <ReviewSection/>
                 </div>
             </div>
         )

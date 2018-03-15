@@ -49,6 +49,7 @@ passport.use(
     scope:'openid profile',
     callbackURL: "/auth"
   },(accessToken, refreshToken, extraParams, profile, done)=>{
+    console.log(profile)
     app
       .get('db')
       .getUserByAuthId(profile.id)
@@ -58,6 +59,7 @@ passport.use(
              .createUserByAuthId([profile.id, profile.displayName])
              .then(created => done(null,created[0]))
         }else{
+          console.log('response from db', response)
           return done(null,response[0])
         }
         });
@@ -99,6 +101,7 @@ app.get('/api/getusers',(req,res) => {
 })
 
 app.get('/api/products',(req,res)=>{
+    console.log(req)
   req.app
      .get('db')
      .getProducts()
@@ -141,7 +144,7 @@ app.get('/api/products/:id',(req,res,next) => {
 app.post('/api/products/add',(req,res)=>{
   req.app
      .get('db')
-     .addItem([req.body.itemName, req.body.itemType, req.body.itemPrice])
+     .addUserItem([req.body.productName, req.body.productDescription, req.body.productPrice])
      .then(response => {
        res.status(200).json(response)
      })

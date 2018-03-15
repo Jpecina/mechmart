@@ -8,7 +8,7 @@ import MainShopFront from './Components/Shop/ShopMain';
 import ItemInfo from './Components/Shop/ItemDescription';
 import CheckOut from "./Components/Shop/CheckOut";
 import AddItem from './Components/AddItem';
-import AdminPage from './Components/AdminPage';
+import UserInterface from './Components/UserInterface';
 
 
 
@@ -22,7 +22,7 @@ export default (
         <Route path = "/shop" component={MainShopFront}/>
         <Route path = "/cart/checkout" component={CheckOut}/>
         <Route path = "/additem" component={AddItem}/>
-        <Route path = "/admin" component={AdminPage}/>        
+        <Route path = "/userpage" component={UserInterface}/>        
         <Route path = '*' render = { () => {
             <div>
                 <p> 404 not found </p>

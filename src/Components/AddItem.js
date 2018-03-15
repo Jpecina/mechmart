@@ -4,7 +4,7 @@ import FormSheet from './Form';
 function AddItem(){
     const style = {
         height:'70%',
-        width: '50%',
+        width: '80%',
         display:'flex',
     }
     return(

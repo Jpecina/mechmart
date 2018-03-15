@@ -15,6 +15,7 @@ import {
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getUsers} from '../ducks/reducer';
+import axios from 'axios'
 
 class Header extends Component {
     constructor(props) {
@@ -22,11 +23,13 @@ class Header extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            user:[]
         };
     }
     componentDidMount(){
         this.props.getUsers();
+        axios.get('/api/me').then(res => {this.setState({user:res.data})})
     }
     toggle() {
         this.setState({
@@ -34,7 +37,20 @@ class Header extends Component {
         });
     }
     render() {
-        console.log("this is props:",this.props.users)
+        // let loggedIn;
+
+        // if ( this.state.user < 0 ){
+        //     let loggedIn = "Login" 
+        //     return loggedIn
+        // }
+        // else {
+        //     let loggedIn = this.state.user.name
+        //     return loggedIn
+        // }
+
+
+         
+        console.log(this.state.user)
 
         return (
             <div>
@@ -56,7 +72,7 @@ class Header extends Component {
                                 <NavLink href="/#/cart">Cart</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href={process.env.REACT_APP_LOGIN}></NavLink>
+                                <NavLink href={process.env.REACT_APP_LOGIN}>Welcome {this.state.user.name}</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

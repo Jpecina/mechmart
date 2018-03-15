@@ -196,5 +196,13 @@ span{
   height:70%;
   width: 50%;
   display:flex;
+  justify-content: center;
   
+}
+.review-component-div{
+  height: 50%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
