@@ -10,14 +10,21 @@ class UserInterface extends Component{
     constructor(){
         super()
         this.state = {
-            user:[]
+            user:[],
+            userOrders:[]
         }
     }
     componentDidMount(){
         this.props.getUsers();
         axios.get('/api/me').then(res => {this.setState({user:res.data})})
+        axios.get('/api/getorders').then(response => {
+            console.log(response)
+            this.setState({userOrders:response.data[0]})
+        })
     }
     render(){
+        console.log("this is the orders data:",this.state.userOrders)
+        console.log("this is the user",this.state.user)
         const adminPageContainer = {
             height:"auto",
             width:"100%",
@@ -39,7 +46,7 @@ class UserInterface extends Component{
                 <div className = "info-table-container" style = {userItemsDisplayContainer}>
                     <h1>Your Items {this.state.user.name}</h1>
                     <div className = "user-items-display-container">
-
+                        <OrdersTable name = {this.state.userOrders.name} itemsName = {this.state.userOrders.product_name} itemPrice = {this.state.userOrders.product_price} />
                     </div>
                 </div>
                 <h1>Add An Item</h1>

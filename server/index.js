@@ -14,7 +14,7 @@ const cart_controllers = require('./controllers/cart_controllers');
 const port = 3001;
 
 const app = express();
-app.use(express.static(`${__dirname}/../build`));
+//app.use(express.static(`${__dirname}/../build`));
 const { 
   CONNECTION_STRING,
   DOMAIN,
@@ -71,8 +71,8 @@ passport.serializeUser((user, done) => done(null,user) );
 passport.deserializeUser((user, done) => done(null,user) );
 
 app.get('/auth',passport.authenticate("auth0",{
-  successRedirect: 'http://localhost:3001/#/',
-  failureRedirect: 'http://localhost:3001/#/login'
+  successRedirect: 'http://localhost:3000/#/',
+  failureRedirect: 'http://localhost:3000/#/login'
 }
 ))
 
@@ -133,13 +133,19 @@ app.get('/api/products/:id',(req,res,next) => {
     app.get('db')
     .getProductsByBrand([req.params.id])
     .then(response => {
-      console.log("products by brand success:", response)
       res.status(200).json(response)
     }).catch(err => {
       res.status(500).json(console.log(err))
     })
 } )
 
+app.get('/api/getorders',(req,res,next) => {
+  console.log("this is req.session auth id:" , req.session.passport.user.authid)
+  app.get('db')
+  .getUserOrderById([req.session.passport.user.authid]).then(response => {
+    res.status(200).json(response)
+  })
+})
 // add Product to database
 
 app.post('/api/products/add',(req,res)=>{
@@ -165,9 +171,12 @@ app.post('/api/products/add',(req,res)=>{
       let cartPush = req.session.user.cart.forEach((cartItem, i)=>{
       let value = parseFloat(req.session.user.cart[i].product_price)
       // console.log("this is the user in session:",req.session)
+      console.log('THIS IS THE session:',req.session)
       req.app
       .get('db')
-      .addOrder([req.session.user.cart[i].product_name,value, req.session.passport.user.authid])
+      .addOrder([req.session.user.cart[i].product_name,value, req.session.passport.user.authid]).then(response => {
+        res.status(200).json(response)
+      }).catch(console.log)
       })
   })
       
@@ -179,6 +188,7 @@ app.get("/api/cart", (req, res, next) => res.status(200).json(req.session.user))
 //add item to cart
 
 app.post('/api/cart',(req,res,next) => {
+  console.log(req.session)
   req.session.user.cart.push(req.body)
   res.status(200).json(req.session.user)
 } )

@@ -17,7 +17,8 @@ class Shop extends Component{
         const cardStyle = {
             maxWidth:'300px',
             maxHeight:'500px',
-            border:'none'
+            border:'none',
+            margin:'20px'
         }
         const productData = this.props.products;
         if (!productData) {

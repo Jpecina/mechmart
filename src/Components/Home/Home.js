@@ -1,25 +1,11 @@
 import React from 'react';
-import Poker from '../../assets/poker.jpg'
-function Home(){
-    const coverphotoStyle={
-        paddingTop:"100px",
-    }
-    const smallPhotos={
-        height:"230px",
-        width:"300px",
-        padding:"20px",
-        display:"flex",
-        backgroundColor:"pink"
 
-    }
+
+function Home(){
+
     return(
         <div className="home-page-main-div">
-        <img src="https://s3.us-east-2.amazonaws.com/devmountain-personal-project-mechmart/mechmarket+pics/coverphoto1.JPG" className="main-image-larger" style={coverphotoStyle}/>
-        <div className="small-cover-images">
-        <img src="https://s3.us-east-2.amazonaws.com/devmountain-personal-project-mechmart/mechmarket+pics/coverphoto2.JPG" style={smallPhotos}/>
-        <div style={smallPhotos}></div>
-        </div>
-        <div></div>
+        <img src="https://static1.squarespace.com/static/563c788ae4b099120ae219e2/t/581fd9cc9f7456e5fe38eec7/1478482918116/?format=1000w"/>
         </div>
     )
 }

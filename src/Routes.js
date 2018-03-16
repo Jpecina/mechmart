@@ -9,6 +9,7 @@ import ItemInfo from './Components/Shop/ItemDescription';
 import CheckOut from "./Components/Shop/CheckOut";
 import AddItem from './Components/AddItem';
 import UserInterface from './Components/UserInterface';
+import CartView from './Components/Shop/CartView';
 
 
 
@@ -17,7 +18,7 @@ export default (
         <Route exact path = "/" component= { Home }  />
      {/*   <Route path = '/login' component = {Login} />*/}
         <Route path = "/about" component={About}/>
-        <Route path = "/cart" component={Cart}/>
+        <Route path = "/cart" component={CartView}/>
         <Route path = "/shop/item/:id" component={ItemInfo}/>
         <Route path = "/shop" component={MainShopFront}/>
         <Route path = "/cart/checkout" component={CheckOut}/>

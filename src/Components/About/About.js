@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
-function About(){
+class About extends Component{
+    componentDidMount(){
+        
+    }   
+    render(){
     return(
         <div>About</div>
     )
+}
 }
 export default About;

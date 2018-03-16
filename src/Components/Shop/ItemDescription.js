@@ -64,8 +64,9 @@ class ItemInfo extends Component{
                         </div>
                         </div>
                     <p>{itemInfo.description}</p>
-                    <ReviewSection/>
+                    
                 </div>
+                <ReviewSection/>
             </div>
         )
     }

@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>Mark</td>
+            <td>{this.props.itemsName}</td>
             <td>Otto</td>
             <td>@mdo</td>
           </tr>
@@ -40,5 +40,9 @@ import { connect } from 'react-redux';
     );
   }
 }
+/*
 
+
+
+*/
 export default OrdersTable;

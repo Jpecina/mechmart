@@ -54,16 +54,15 @@ class Cart extends Component{
                 )
             })
         }
-
+        const mainDivStyle = {
+            height:'100vh',
+            width:'100vw',
+            backgoundColor:"ffff"
+        }
         return(
-            <div className="shopping-cart-div-main">
+        <div className="shopping-cart-div-main">
             {cartList}
-            <div className="total-checkout-div">
-            <h2>Total:${totalOfItems}</h2>
-            <Button onClick = {this.checkOut()}>CheckOut</Button>
-            </div>
-            </div>
-            
+        </div>
 
         )
     }

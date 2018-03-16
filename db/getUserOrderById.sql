@@ -1,4 +1,4 @@
-SELECT * FROM users INNER JOIN orders ON users.authid = orders.user_auth_id
+SELECT * FROM users INNER JOIN orders ON users.authid = orders.user_order_id WHERE authid = $1
 
 
 
