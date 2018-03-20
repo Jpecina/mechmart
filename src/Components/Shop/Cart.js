@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import {Button} from 'reactstrap'
+import Checkout from '../../CheckOutStripe'
+import Order from './Order';
 
 
 class Cart extends Component{
@@ -27,7 +29,8 @@ class Cart extends Component{
           })
     }
     checkOut(){
-        axios.post('/api/orderplaced').then(response => console.log(response))
+        axios.post('/api/orderplaced').then(response => console.log(response));
+        axios.put('/api/stockupdate').then(response => console.log(response));
     }
     render(){
         let total = this.state.total;
@@ -36,7 +39,7 @@ class Cart extends Component{
         const cartItems = this.state.cart;
         console.log(this.state.cart);
         if (!(this.state.cart.length > 0)) {
-            cartList = <div> loading.... </div>
+            cartList = <div> <h2>Go Buy Something yo</h2> </div>
         } 
         else {
             cartList = cartItems.map((item, i) => {
@@ -45,10 +48,17 @@ class Cart extends Component{
                 <div key = {i} className="checkout-item-main-div">
                         <img src={item.imageone} className="cart-image"/>
                     <div className="cart-item-info">
-                        <h4>{item.product_name}</h4>
-                        <h1>{item.product_price}</h1>   
-                    <Button onClick = {() => {
-                    this.deleteItem(item.id)}}>Delete</Button> 
+                        <div className = "name-and-brand">
+                            <h3>{item.product_name}</h3>
+                            <p>{item.product_brand}</p>
+                        </div>
+                        <div className="price">
+                            <h2>${item.product_price}</h2>
+                            <Button onClick = {() => {
+                                this.deleteItem(item.id)}}>X</Button> 
+                        </div>
+                          
+                    
                     </div>        
                 </div> 
                 )
@@ -61,7 +71,29 @@ class Cart extends Component{
         }
         return(
         <div className="shopping-cart-div-main">
-            {cartList}
+            <div className="cart-div">
+                {cartList}
+            </div>
+                
+            <div className="total-box">
+                <h1>total:</h1>
+                <div className = "order-info">
+                    <div className="order-quantity">
+                        <h6>Order Quantity</h6>
+                        <p>{cartList.length}</p>
+                    </div>
+                    <div className="total-info">
+                        <h6>Subtotal</h6>
+                        <p>{totalOfItems}</p>
+                    </div>
+                    <div>
+                    <button onClick = {() => this.checkOut()}></button>
+                    <Order amount = {totalOfItems}  name = {'MechMart'} />
+                    </div>
+                </div>
+                
+            </div>
+            
         </div>
 
         )

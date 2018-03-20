@@ -15,6 +15,16 @@ const port = 3001;
 
 const app = express();
 //app.use(express.static(`${__dirname}/../build`));
+const SERVER_CONFIGS = require('./constants/server');
+
+const configureServer = require('./server');
+const configureRoutes = require('./routes');
+
+
+
+configureServer(app);
+configureRoutes(app);
+
 const { 
   CONNECTION_STRING,
   DOMAIN,
@@ -78,12 +88,12 @@ app.get('/auth',passport.authenticate("auth0",{
 
 app.get('/api/me', (req,res)=>{
   if(req.user) res.status(200).json(req.user);
-  else res.redirect('http://localhost:3001/#/login')
+  else res.redirect('http://localhost:3000/#/login')
 })
 
 app.get('/api/logout', (req,res) => {
   req.session.destroy(()=>{
-    res.redirect('http://localhost:3001/#/login')
+    res.redirect('http://localhost:3000/#/login')
   })
 })
 
@@ -126,6 +136,41 @@ app.get('/api/product/:id',(req,res,next) => {
     res.status(500).json(console.log(err))
   })
 });
+app.get('/api/products/favorites',(req,res,next) => {
+  app.get('db')
+  .getAllFavorites([req.session.passport.user.authid])
+  .then(response => {
+    res.status(200).json(response)
+  })
+  .catch(err => {
+    res.status(500).json("message/getAllFavorites:",error)
+  })
+});
+app.delete('/api/products/favorites/delete/:id',(req,res,next)=>{
+  console.log("this is req.params:",req.params.id)
+  app.get('db')
+  .deleteFavoriteById([req.params.id,req.session.passport.user.authid])
+  .then(response => {
+    res.status(200).json(response)
+  })
+  .catch(err => {
+    res.status(500).json(err)
+  })
+});
+
+app.post('/api/saveproduct',(req,res,next) => {
+  console.log("this is the req.body:",req.body.id)
+  app.get('db')
+  .saveItem([req.session.passport.user.authid,req.body.product_name,req.body.product_price,req.body.imageone,req.body.id])
+  .then(response => {
+      res.status(200).json(response);
+    })
+  .catch(error => {
+      res.status(500).json("this is the error message:", error)
+    })
+});
+
+
 
 // get product by Brand
 
@@ -140,7 +185,7 @@ app.get('/api/products/:id',(req,res,next) => {
 } )
 
 app.get('/api/getorders',(req,res,next) => {
-  console.log("this is req.session auth id:" , req.session.passport.user.authid)
+  console.log("this is req.session auth id:" , req.session)
   app.get('db')
   .getUserOrderById([req.session.passport.user.authid]).then(response => {
     res.status(200).json(response)
@@ -151,7 +196,7 @@ app.get('/api/getorders',(req,res,next) => {
 app.post('/api/products/add',(req,res)=>{
   req.app
      .get('db')
-     .addUserItem([req.body.productName, req.body.productDescription, req.body.productPrice])
+     .addUserItem([req.body.productName, req.body.productDescription, req.body.productPrice,req.session.passport.user.authid])
      .then(response => {
        res.status(200).json(response)
      })
@@ -162,7 +207,6 @@ app.post('/api/products/add',(req,res)=>{
 });
 // add order to database
       
-
 
 
 
@@ -178,6 +222,17 @@ app.post('/api/products/add',(req,res)=>{
         res.status(200).json(response)
       }).catch(console.log)
       })
+  })
+
+  app.put('/api/stockupdate',(req,res,next)=>{
+    app.get('db')
+    .updateStock()
+    .then(response => {
+      res.status(200).json(response)
+    })
+    .catch(err => {
+      res.status(500).json(error)
+    })
   })
       
 

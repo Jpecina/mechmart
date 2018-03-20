@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from '../Header';
 import {Button} from 'reactstrap';
 import Review from '../Form';
-import ReviewSection from './ReviewSection/ReviewSection';
+import AddProductReview from '../../Review'
 
 
 class ItemInfo extends Component{
@@ -26,6 +26,9 @@ class ItemInfo extends Component{
             this.setState({
                 item:response.data[0],currentImage:response.data[0].imageone})
         })
+    }
+    saveItem(item){
+        axios.post('/api/saveproduct',item)
     }
     addToCart(item){
         axios.post('/api/cart',item).then(response => console.log(response.data.cart)).catch(err=>console.log(err))
@@ -61,12 +64,13 @@ class ItemInfo extends Component{
                             <img src = {itemInfo.imagethree} onClick={() => this.imageSelectThree()} className="small-image"/>
                             </div>
                             <Button className="add-to-cart-button" onClick={(e) => this.addToCart(itemInfo)}>Add To Cart</Button>
+                            <Button onClick = {(e) => this.saveItem(itemInfo)}>Save</Button>
                         </div>
                         </div>
                     <p>{itemInfo.description}</p>
                     
                 </div>
-                <ReviewSection/>
+                <AddProductReview/>
             </div>
         )
     }

@@ -1,0 +1,1 @@
+INSERT INTO favorites (user_favorites_id, product_name, product_price,product_image_url,item_unique_id) VALUES ($1,$2,$3,$4,$5)

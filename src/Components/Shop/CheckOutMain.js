@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Cart from './Cart'
 
-class CheckOut extends Component{
+class CheckOutMain extends Component{
     render(){
         return(
             <div className="main-checkout-div">
@@ -15,4 +15,4 @@ class CheckOut extends Component{
         )
     }
 }
-export default CheckOut;
+export default CheckOutMain;

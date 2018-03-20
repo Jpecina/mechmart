@@ -72,6 +72,9 @@ class Header extends Component {
                                 <NavLink href="/#/cart">Cart</NavLink>
                             </NavItem>
                             <NavItem>
+                                <NavLink href="/#/favorites">Favorites</NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink href={process.env.REACT_APP_LOGIN}>Welcome {this.state.user.name}</NavLink>
                             </NavItem>
                         </Nav>

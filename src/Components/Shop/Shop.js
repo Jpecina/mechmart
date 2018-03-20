@@ -10,10 +10,12 @@ import {Link} from 'react-router-dom';
 
 class Shop extends Component{
     componentDidMount(){
-        this.props.getProducts();
-        this.props.getProductsByBrand();
+        this.props.getProducts()
     }
     render(){
+        const link = {
+            textDecoration:'none'
+        }
         const cardStyle = {
             maxWidth:'300px',
             maxHeight:'500px',
@@ -31,14 +33,14 @@ class Shop extends Component{
             return(
                 <div key={i}>
                 <Card style = {cardStyle}>
-                    <CardImg top width="100%" src={product.imageone} alt="Card image cap" />
+                     <Link to = {`/shop/item/${product.id}`}>
+                     <CardImg top width="100%" src={product.imageone} alt="Card image cap" />
+                     </Link>
                     <CardBody>
+                        <CardTitle>{product.product_name}</CardTitle>
                         <CardTitle>{product.product_brand}</CardTitle>
                         <CardSubtitle>{product.product_price}</CardSubtitle>
                         <CardText>{product.color}</CardText>
-                        <Link to = {`/shop/item/${product.id}`}>
-                        <Button>More Info</Button>
-                        </Link>
                     </CardBody>
                 </Card>
                 </div>

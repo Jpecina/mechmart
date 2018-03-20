@@ -144,25 +144,82 @@ span{
 .checkout-item-main-div{
   display: flex;
   height:200px;
-  width: 100vw;
-  justify-content: center;
+  width: 100%;
+  flex-direction: row;
+  padding: 20px;
+
 }
 .cart-image{
-  max-height: 200px;
-  max-width: 300px;
+  max-height: 80%;
+  max-width: 20%;
 }
 .cart-item-info{
-  height:100vh;
-  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  height:100%;
+  max-width: 80%;
+}
+.name-and-brand{
+  max-width: 50%;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.price{
+  margin-left: 300px;
 }
 .shopping-cart-div-main{
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  height:85%;
-  width:50%;
-  background-color: indianred;
+  justify-content: center;
+  flex-direction: row;
+  height:auto;
+  width:100%;
+  margin-top: 100px;
 }
+.cart-div{
+  height: auto;
+  width: 50%;
+  padding: 15px;
+  margin-right: 20px;
+  
+}
+.total-box{
+  height:250px;
+  width:400px;
+  margin:30px 30px 20px 30px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-evenly;
+}
+.check-out-button{
+  height:50px;
+  width:100%;
+  border-radius: 10px;
+  color: white;
+  background-color: rgb(53, 56, 58);
+  
+}
+.order-quantity{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.total-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.order-info{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
+
 .home-page-main-div{
   display:flex;
   align-content: center;
@@ -180,10 +237,7 @@ span{
   width: 300px;
   background-color: mediumpurple;
 }
-.small-cover-images{
-        padding:20px;
-        display:flex;
-}
+
 .main-checkout-div{
   display: flex;
   background-color: lightslategrey;
@@ -218,7 +272,6 @@ span{
 
 .main-shop-view-container{
   height:100vh;
-  background-color: green;
   margin-left: 30px;
   margin-right: 30px;
   display: flex;
@@ -277,4 +330,38 @@ span{
   max-width: 60%;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.favorite-list-item-container{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-content: center;
+align-items: center;
+}
+
+.review-results-box{
+  height:400px;
+  width: 600px;
+  
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.favorite-list-item-container{
+  height:auto;
+}
+.favorites-view-container-main{
+  height:auto;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.info-table-container{
+  display:flex;
+}
+.delete-from-faves-button{
+  height:50px;
+  width:150px;
+  background-color: #222;
+  color: white;
 }

@@ -75,6 +75,7 @@ export default function reducer( state = initialState ,action ){
             return Object.assign({},state,{ isLoading:true });
 
         case `${GET_PRODUCTS}_FULFILLED`:
+        console.log("actions.payload", action.payload)
             return Object.assign({},state,{
                 isLoading:false,
                 products: action.payload

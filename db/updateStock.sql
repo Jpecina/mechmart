@@ -1,0 +1,1 @@
+UPDATE products SET isAvailable = false WHERE isAvailable = true;
