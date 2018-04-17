@@ -14,7 +14,7 @@ const cart_controllers = require('./controllers/cart_controllers');
 const port = 3001;
 
 const app = express();
-//app.use(express.static(`${__dirname}/../build`));
+app.use(express.static(`${__dirname}/../build`));
 const SERVER_CONFIGS = require('./constants/server');
 
 const configureServer = require('./server');
