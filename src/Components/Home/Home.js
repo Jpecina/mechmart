@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 
 function Home(){
@@ -6,8 +7,15 @@ function Home(){
         minHeight:'100%'
     }
     return(
-        <div className="home-page-main-div">
-        <img src="https://static1.squarespace.com/static/563c788ae4b099120ae219e2/t/581fd9cc9f7456e5fe38eec7/1478482918116/?format=1000w" style = {mainImage}/>
+        <div className="home-page-main-div" >
+        <div className="main-home-body" >
+            <h3>All Your Keyboard Needs</h3>
+            <h6>Shop Our Wide Range Of Products</h6>
+            <Link to="/shop">
+            <button id="main-home-shop-button">Shop Now</button>
+            </Link>
+        </div>
+        
         </div>
     )
 }
